@@ -32,7 +32,7 @@ class ImdbSpider(scrapy.Spider):
         
     def parse_actor_page(self,response):
         actor = response.css('title').get()[7:].split(" - IMDb",1)[0]
-        for movie_tv in response.css("div.filmo-row"):
+        for movie_tv in response.css('div.filmo-row[id^="act"]'):
             yield {
                 "actor": actor,
                 "movie_tv": movie_tv.css("a::text").get()
